@@ -1,5 +1,5 @@
 from pytest_bdd import scenarios, parsers, given, when, then
-from pytest_bdd.parsers import string
+import datetime
 
 from retirement import year_input_validation, month_input_validation, calculate_retirement
 
@@ -105,3 +105,24 @@ def correct_retirement_age_calculation(year, month, retirement_age):
     age, date = calculate_retirement(int(year), int(month))
 
     assert retirement_age == age
+
+
+@given('the program accepts the validation of year and month')
+def valid_value_check():
+    pass
+
+
+@when('the program passes on the values')
+def call_calculation():
+    pass
+
+
+@then(parsers.cfparse(
+    'the program will use the "{year:String}" and "{month:String}" to correctly calculate the'
+    ' "{retirement_year:String}"', extra_types=EXTRA_TYPES))
+@then('the program will use the "<year>" and "<month>" to correctly calculate the "<retirement_date>"')
+def correct_retirement_age_calculation(year, month, retirement_date):
+    age, date = calculate_retirement(int(year), int(month))
+    retirement_date_calculated = date.strftime("%B of %Y")
+
+    assert retirement_date_calculated == retirement_date

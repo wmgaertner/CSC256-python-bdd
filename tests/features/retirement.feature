@@ -72,3 +72,20 @@ Feature: Calculate Retirement
             | 1960 | 1     | 67 and 0 months.  |
             | 2020 | 1     | 67 and 0 months.  |
 
+    Scenario Outline: Calculating Retirement Date
+        Given the program accepts the validation of year and month
+        When the program passes on the values
+        Then the program will use the "<year>" and "<month>" to correctly calculate the "<retirement_date>"
+
+        Examples: Inputs and Outputs
+            | year | month | retirement_date  |
+            | 1900 | 1     | January of 1965  |
+            | 1937 | 12    | December of 2002 |
+            | 1938 | 3     | May of 2003      |
+            | 1943 | 1     | January of 2009  |
+            | 1954 | 12    | December of 2020 |
+            | 1955 | 1     | March of 2021    |
+            | 1959 | 12    | October of 2026  |
+            | 1960 | 1     | January of 2027  |
+            | 2020 | 1     | January of 2087   |
+
